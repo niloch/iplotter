@@ -8,4 +8,8 @@ setup(name='ipython_c3',
       author_email='csullivan@crimsonhexagon.com',
       license='MIT',
       packages=['ipython_c3'],
+      install_requires=[
+          'Jinja2>=2.0',
+          'ipython>=3.0'
+      ],
       zip_safe=False)
