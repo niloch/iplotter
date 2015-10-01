@@ -22,7 +22,6 @@ class Plotter(object):
 
     def plot(self, data, name='c3', w=800, h=420):
         html = Template(self.template).render(data=data)
-        with open(os.path.join(os.getcwd(), name + '.html'), 'w') as f:
+        with open(name + '.html', 'w') as f:
             f.write(html)
-        print os.path.join(os.getcwd(), name + '.html')
-        return IFrame(os.path.join(os.getcwd(), name + '.html'), w, h)
+        return IFrame(name + '.html', w, h)
