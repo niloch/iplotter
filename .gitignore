@@ -3,3 +3,5 @@
 /dist/
 # Python egg metadata, regenerated from source files by setuptools.
 /*.egg-info
+# added by GitSavvy
+/ipython_c3/__init__.py
