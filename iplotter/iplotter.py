@@ -45,7 +45,7 @@ class IPlotter(object):
 
     def render(self, data):
         '''
-        renders the HTML template with supplied data to build the plotf
+        render the HTML template with supplied data to build the plotf
         '''
         if self.mode != 'c3' and len(data) == 2:
             layout = data[1]
@@ -57,20 +57,20 @@ class IPlotter(object):
 
     def plot_and_save(self, data, w=800, h=420, name='plot', overwrite=True):
         '''
-        saves the rendered html to a file and returns an IFrame to dislay the plot in the notebook
+        save the rendered html to a file and returns an IFrame to dislay the plot in the notebook
         '''
         self.save(data, name, overwrite)
         return IFrame(name + '.html', w, h)
 
     def plot(self, data, w=800, h=420):
         '''
-        outputs an iframe containing the plot in the notebook without saving
+        output an iframe containing the plot in the notebook without saving
         '''
         return HTML(self.iframe_src.format(self.render(data=data), w, h))
 
     def save(self, data, name='plot', overwrite=True):
         '''
-        saves the rendered html to a file in the same directory as the notebook
+        save the rendered html to a file in the same directory as the notebook
         '''
         html = self.render(data=data)
         if overwrite:
