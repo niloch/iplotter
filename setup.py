@@ -10,6 +10,7 @@ setup(name='iplotter',
       packages=['iplotter'],
       install_requires=[
           'Jinja2>=2.0',
-          'ipython>=3.0'
+          'ipython>=3.0',
+          'notebook>=3.0'
       ],
       zip_safe=False)

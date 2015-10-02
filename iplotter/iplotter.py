@@ -6,7 +6,9 @@ import json
 
 class IPlotter(object):
 
-    """Plotting Object for c3.js and plotly.js charts in ipython  notebook"""
+    """
+    Plotting Object for c3.js and plotly.js charts in ipython  notebook
+    """
 
     def __init__(self, mode="c3"):
         super(IPlotter, self).__init__()
@@ -42,25 +44,34 @@ class IPlotter(object):
         self.iframe_src = '<iframe srcdoc="{}" src="" width="{}" height="{}" sandbox="allow-scripts"></iframe>'
 
     def render(self, data):
-        '''render the HTML template for the plot with supplied data'''
-        if len(data) == 2:
+        '''
+        renders the HTML template with supplied data to build the plotf
+        '''
+        if self.mode != 'c3' and len(data) == 2:
             layout = data[1]
             data = data[0]
         else:
             layout = None
-
         return Template(self.template).render(data=json.dumps(data).replace('"', "'"),
                                               layout=json.dumps(layout).replace('"', "'"))
 
     def plot_and_save(self, data, w=800, h=420, name='plot', overwrite=True):
-        ''' '''
+        '''
+        saves the rendered html to a file and returns an IFrame to dislay the plot in the notebook
+        '''
         self.save(data, name, overwrite)
         return IFrame(name + '.html', w, h)
 
     def plot(self, data, w=800, h=420):
+        '''
+        outputs an iframe containing the plot in the notebook without saving
+        '''
         return HTML(self.iframe_src.format(self.render(data=data), w, h))
 
     def save(self, data, name='plot', overwrite=True):
+        '''
+        saves the rendered html to a file in the same directory as the notebook
+        '''
         html = self.render(data=data)
         if overwrite:
             with open(name + '.html', 'w') as f:
