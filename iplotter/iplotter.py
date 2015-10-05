@@ -43,32 +43,27 @@ class IPlotter(object):
             '''
         self.iframe_src = '<iframe srcdoc="{}" src="" width="{}" height="{}" sandbox="allow-scripts"></iframe>'
 
-    def render(self, data):
+    def render(self, data, layout=None):
         '''
         render the HTML template with supplied data to build the plotf
         '''
-        if self.mode != 'c3' and len(data) == 2:
-            layout = data[1]
-            data = data[0]
-        else:
-            layout = None
         return Template(self.template).render(data=json.dumps(data).replace('"', "'"),
                                               layout=json.dumps(layout).replace('"', "'"))
 
-    def plot_and_save(self, data, w=800, h=420, name='plot', overwrite=True):
+    def plot_and_save(self, data, layout=None, w=800, h=420, name='plot', overwrite=True):
         '''
         save the rendered html to a file and returns an IFrame to dislay the plot in the notebook
         '''
-        self.save(data, name, overwrite)
+        self.save(data, layout, name, overwrite)
         return IFrame(name + '.html', w, h)
 
-    def plot(self, data, w=800, h=420):
+    def plot(self, data, layout=None, w=800, h=420):
         '''
         output an iframe containing the plot in the notebook without saving
         '''
-        return HTML(self.iframe_src.format(self.render(data=data), w, h))
+        return HTML(self.iframe_src.format(self.render(data=data, layout=layout), w, h))
 
-    def save(self, data, name='plot', overwrite=True):
+    def save(self, data, layout=None, name='plot', overwrite=True):
         '''
         save the rendered html to a file in the same directory as the notebook
         '''
