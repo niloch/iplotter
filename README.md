@@ -1,7 +1,11 @@
-# IPlotter:  C3.js and plotly.js charting in ipython/jupyter notebooks
+IPlotter
+=================
+
+###C3.js and plotly.js charting in ipython/jupyter notebooks
 
 <!-- MarkdownTOC -->
 
+- [](#)
 - [Installation](#installation)
 - [C3.js](#c3js)
 - [plotly.js](#plotlyjs)
@@ -9,7 +13,7 @@
 - [Examples](#examples)
 
 <!-- /MarkdownTOC -->
-
+-------
 
 IPlotter is a simple library for generating interactive charts in C3.js or plotly.js from simple python data structures (dictionaries, lists, etc.)
 
@@ -57,7 +61,7 @@ chart = {
 
 plotter.plot(chart)
 ```
-![Plot1](plot1.png?raw=true "Plot 1")
+![Plot1](imgs/plot1.png?raw=true "Plot 1")
 
 
 ### plotly.js Grouped Bar Chart
@@ -100,5 +104,5 @@ layout = {
 
 plotter2.plot(data,layout)
 ```
-![Plot2](plot2.png?raw=true "Plot 2")
+![Plot2](imgs/plot2.png?raw=true "Plot 2")
 
