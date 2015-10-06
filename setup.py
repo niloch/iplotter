@@ -5,6 +5,7 @@ import os
 
 def get_version():
     version = os.popen('git describe', "r").read().strip()
+    print "Getting version\n=============="
     return version
 
 if __name__ == '__main__':
