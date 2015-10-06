@@ -37,6 +37,8 @@ iplotter contains one class called IPlotter which is initialized according to th
 ```python
 from iplotter import IPlotter
 
+plotter = IPlotter('c3')
+
 chart = {
     "data": {
         "columns": [
@@ -53,14 +55,16 @@ chart = {
     }
 }
 
-plotter = IPlotter('c3')
-
 plotter.plot(chart)
 ```
+![Plot1](plot1.png?raw=true "Plot 1")
+
 
 ### plotly.js Grouped Bar Chart
 
 ```python
+from iplotter import IPlotter
+
 plotter2 = IPlotter('plotly')
 
 trace1 = {
@@ -96,4 +100,5 @@ layout = {
 
 plotter2.plot(data,layout)
 ```
+![Plot2](plot2.png?raw=true "Plot 2")
 
