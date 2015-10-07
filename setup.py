@@ -29,7 +29,7 @@ if __name__ == '__main__':
               'Intended Audience :: Science/Research',
               'License :: OSI Approved :: MIT License',
               'Topic :: Scientific/Engineering :: Visualization',
-              'Programming Language :: Python :: 2,',
+              'Programming Language :: Python :: 2',
               'Programming Language :: Python :: 2.7',
               'Programming Language :: Python :: 3',
               "Programming Language :: Python :: 3.3",
