@@ -12,7 +12,7 @@ IPlotter
 IPlotter is a simple library for generating interactive charts in C3.js or plotly.js from simple python data structures (dictionaries, lists, etc.)
 
 ## Installation
-To install this package run `pip install git+git://github.com/niloch/iplotter.git@master`
+To install this package run `pip install git+git://github.com/niloch/iplotter.git@master` or `pip install iplotter`
 
 ## [C3.js](http://c3js.org/)
 
@@ -33,7 +33,7 @@ iplotter contains one class called IPlotter which is initialized according to th
 ### C3 Stacked Area Spline Chart
 
 ```python
-from iplotter import IPlotter
+from iplotter.iplotter import IPlotter
 
 plotter = IPlotter('c3')
 
@@ -61,7 +61,7 @@ plotter.plot(chart)
 ### plotly.js Grouped Bar Chart
 
 ```python
-from iplotter import IPlotter
+from iplotter.iplotter import IPlotter
 
 plotter2 = IPlotter('plotly')
 
