@@ -9,7 +9,7 @@ IPlotter
 - [Usage](#usage)
 - [Examples](#examples)
 
-IPlotter is a simple library for generating interactive charts in C3.js or plotly.js from simple python data structures (dictionaries, lists, etc.)
+IPlotter is a simple library for generating interactive charts ipython/jupyter notebooks using C3.js or plotly.js from simple python data structures (dictionaries, lists, etc.)
 
 ## Installation
 To install this package run `pip install git+git://github.com/niloch/iplotter.git@master` or `pip install iplotter`
@@ -18,15 +18,15 @@ To install this package run `pip install git+git://github.com/niloch/iplotter.gi
 
 C3 is a charting library based on d3 for making interactive and easy to understand charts, graphs, and plots.
 
-Charts can be conveniently declared as javascript objects and bound to DOM elements has animated transitions for hiding/displaying data.
+Charts can be conveniently declared and bound to DOM elements with animated transitions for hiding/displaying data.
 
 ## [plotly.js](https://plot.ly/javascript/)
 
-Plotly.js is a charting library based on d3 from plotly.  plotly provides native clients in many languages including python which can be rendered in an ipython notebook.  However, the native python client requires the user to create an account and by default makes all plots public for free accounts. plotly.js can be used without creating an account and the results are rendered locally and kept private.  IPlotter makes use of the plotly.js library for chart rendering instead of the native python package from plotly.
+Plotly.js is a charting library based on d3 from plotly.  plotly provides native clients in many programming languages including python which can be rendered in an ipython notebook.  However, the native python client requires the user to create an account and by default makes all plots public. plotly.js can be used without creating an account and are rendered locally to keep everything private.  IPlotter makes use of the plotly.js library for chart rendering instead of the native python client from plotly which performs the rendering on their servers.
 
 ## Usage
 
-iplotter contains one class called IPlotter which is initialized according to the library that will be used ('c3/plotly').  An instantiated plotter's functions are called on supplied data with optional arguments for size and filename if needed.  The data should be a python dictionary, with an equivalent structure according the specifications for the chart json objects in either [C3.js](http://c3js.org/) or [plotly.js](https://plot.ly/javascript/).  plotly.js optionally allows specifying the chart layout as a separate dictionary.
+The iplotter module contains the IPlotter class which is initialized with chosen library('c3'/'plotly'). The plotter's functions are called on a dictionary containing the data specifying the chart attributes.  There are optional arguments for graph size and filename if needed.  The data dictionary must have a structure equivalent to the JSON specifications from [C3.js](http://c3js.org/) or [plotly.js](https://plot.ly/javascript/).  plotly.js optionally allows specifying the chart layout as a separate dictionary.  Plots can be rendered in the ipython notebook and saved to the current directory as html, for later reference.
 
 ## Examples
 
@@ -100,3 +100,24 @@ plotter2.plot(data,layout)
 ```
 ![Plot2](imgs/plot2.png?raw=true "Plot 2")
 
+### plotly.js HeatMap
+
+```python
+from iplotter.iplotter import IPlotter
+
+plotter = IPlotter('plotly')
+
+data = [{
+ 'colorscale': 'YIGnBu',
+ 'reversescale': True,
+ 'type': u'heatmap',
+ 'x': ['class1', 'class2', 'class3'],
+ 'y': ['class1', 'class2', 'class3'],
+ 'z': [[ 0.7,  0.2,  0.1],
+        [ 0.2,  0.7,  0.1],
+        [ 0.15,  0.27,  0.56]]}]
+
+
+plotter.plot_and_save(data, w=600, h=600, name='heatmap1', overwrite=True)
+```
+![Plot3](imgs/plot3.png?raw=true "Plot 3")
