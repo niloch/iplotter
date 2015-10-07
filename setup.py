@@ -10,7 +10,7 @@ if __name__ == '__main__':
           version=__VERSION__,
           description='C3.js and plotly.js for iPython/Jupyter notebooks',
           setup_requires=['setuptools-markdown'],
-          long_description_markdown_filename='README.md'
+          long_description_markdown_filename='README.md',
           url='https://github.com/niloch/iplotter',
           author='Colin',
           author_email='csulliva@brandeis.edu',
