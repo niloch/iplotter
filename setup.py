@@ -2,7 +2,7 @@ from setuptools import setup
 from setuptools import find_packages
 import os
 
-__VERSION__ = '0.1.0'
+__VERSION__ = '0.1.1'
 
 if __name__ == '__main__':
 
