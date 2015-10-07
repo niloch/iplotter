@@ -2,17 +2,15 @@ from setuptools import setup
 from setuptools import find_packages
 import os
 
-
-def get_version():
-    version = os.popen('git describe', "r").read().strip()
-    print "Getting version\n=============="
-    return version
+__VERSION__ = '0.1.0'
 
 if __name__ == '__main__':
 
     setup(name='iplotter',
-          version=get_version(),
+          version=__VERSION__,
           description='C3.js and plotly.js for iPython/Jupyter notebooks',
+          setup_requires=['setuptools-markdown'],
+          long_description_markdown_filename='README.md'
           url='https://github.com/niloch/iplotter',
           author='Colin',
           author_email='csulliva@brandeis.edu',
@@ -24,4 +22,10 @@ if __name__ == '__main__':
               'notebook>=3.0'
           ],
           zip_safe=False,
-          include_package_data=True)
+          include_package_data=True,
+          classifiers=[
+              'Development Status :: 3 - Alpha',
+              'Intended Audience :: Data Scientists',
+              'License :: OSI Approved :: MIT License',
+              'Programming Language :: Python :: 2.7',
+          ])

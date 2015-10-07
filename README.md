@@ -3,15 +3,11 @@ IPlotter
 
 ##C3.js and plotly.js charting in ipython/jupyter notebooks
 
-<!-- MarkdownTOC -->
-
 - [Installation](#installation)
 - [C3.js](#c3js)
 - [plotly.js](#plotlyjs)
 - [Usage](#usage)
 - [Examples](#examples)
-
-<!-- /MarkdownTOC -->
 
 IPlotter is a simple library for generating interactive charts in C3.js or plotly.js from simple python data structures (dictionaries, lists, etc.)
 
