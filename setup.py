@@ -2,12 +2,12 @@ from setuptools import setup
 from setuptools import find_packages
 import os
 
-__VERSION__ = '0.1.1'
+from iplotter import __version__
 
 if __name__ == '__main__':
 
     setup(name='iplotter',
-          version=__VERSION__,
+          version=__version__,
           description='C3.js and plotly.js for iPython/Jupyter notebooks',
           setup_requires=['setuptools-markdown'],
           long_description_markdown_filename='README.md',
