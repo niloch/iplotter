@@ -94,7 +94,7 @@ layout = {
     "tickangle": -45
   },
   "barmode": 'group'
-};
+}
 
 plotter2.plot(data,layout)
 ```
