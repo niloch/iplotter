@@ -9,7 +9,7 @@ IPlotter
 - [Usage](#usage)
 - [Examples](#examples)
 
-IPlotter is a simple library for generating interactive charts ipython/jupyter notebooks using C3.js or plotly.js from simple python data structures (dictionaries, lists, etc.)
+iplotter is a simple package for generating interactive charts ipython/jupyter notebooks using C3.js or plotly.js from simple python data structures (dictionaries, lists, etc.)
 
 ## Installation
 To install this package run `pip install git+git://github.com/niloch/iplotter.git@master` or `pip install iplotter`
@@ -26,16 +26,16 @@ Plotly.js is a charting library based on d3 from plotly.  plotly provides native
 
 ## Usage
 
-The iplotter module contains the IPlotter class which is initialized with chosen library('c3'/'plotly'). The plotter's functions are called on a dictionary containing the data specifying the chart attributes.  There are optional arguments for graph size and filename if needed.  The data dictionary must have a structure equivalent to the JSON specifications from [C3.js](http://c3js.org/) or [plotly.js](https://plot.ly/javascript/).  plotly.js optionally allows specifying the chart layout as a separate dictionary.  Plots can be rendered in the ipython notebook and saved to the current directory as html, for later reference.
+The iplotter module contains clasess for both JavaScript Libraries. The plotter's functions take a dictionary parameter containing the data specifying the chart attributes.  There are optional arguments for graph size and filename if needed.  The data dictionary must have a structure equivalent to the JSON specifications from [C3.js](http://c3js.org/) or [plotly.js](https://plot.ly/javascript/).  plotly.js optionally allows specifying the chart layout as a separate dictionary.  Plots can be rendered in the ipython notebook and saved to the current directory as html, for later reference.
 
 ## Examples
 
 ### C3 Stacked Area Spline Chart
 
 ```python
-from iplotter.iplotter import IPlotter
+from iplotter.iplotter import C3Plotter
 
-plotter = IPlotter('c3')
+plotter = C3Plotter()
 
 chart = {
     "data": {
@@ -61,9 +61,9 @@ plotter.plot(chart)
 ### plotly.js Grouped Bar Chart
 
 ```python
-from iplotter.iplotter import IPlotter
+from iplotter.iplotter import PlotlyPlotter
 
-plotter2 = IPlotter('plotly')
+plotter2 = PlotlyPlotter()
 
 trace1 = {
   "x": ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
@@ -103,9 +103,9 @@ plotter2.plot(data,layout)
 ### plotly.js HeatMap
 
 ```python
-from iplotter.iplotter import IPlotter
+from iplotter.iplotter import PlotlyPlotter
 
-plotter = IPlotter('plotly')
+plotter = PlotlyPlotter()
 
 data = [{
  'colorscale': 'YIGnBu',
