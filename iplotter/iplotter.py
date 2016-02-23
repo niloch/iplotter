@@ -2,7 +2,7 @@ from jinja2 import Template
 from IPython.display import IFrame, HTML
 import os
 import json
-from abc import ABCMeta, abstractmethod, abstractproperty
+from abc import ABCMeta, abstractmethod
 
 
 class IPlotter(object):
@@ -12,7 +12,7 @@ class IPlotter(object):
 
     def __init__(self):
         super(IPlotter, self).__init__()
-        self.iframe_src = '<iframe srcdoc="{}" src="" width="{}" height="{}" sandbox="allow-scripts"></iframe>'
+        self.iframe = '<iframe srcdoc="{}" src="" width="{}" height="{}" sandbox="allow-scripts"></iframe>'
 
     @abstractmethod
     def render(self):
@@ -37,28 +37,38 @@ class C3Plotter(IPlotter):
     Plotting Object for c3.js charts in ipython  notebook
     """
 
-    def __init__(self, mode="c3"):
+    def __init__(self):
         super(C3Plotter, self).__init__()
-        self.template = '''
+
+        self.head = '''
             <!-- Load c3.css -->
             <link href='https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.10/c3.min.css' rel='stylesheet' type='text/css'/>
 
             <!-- Load d3.js and c3.js -->
             <script src='http://d3js.org/d3.v3.min.js' charset='utf-8'></script>
             <script src='http://cdnjs.cloudflare.com/ajax/libs/c3/0.4.10/c3.min.js'></script>
-            <div id=chart></div>
-            <script> c3.generate({{data}});</script>
+
         '''
 
-    def render(self, data):
+        self.template = '''
+            <div id={{name}}></div>
+            <script>
+                var {{name}} = document.getElementById('{{name}}');
+                var data = {{data}};
+                data['bindto']='#{{name}}'
+                c3.generate(data);
+            </script>
         '''
-        render the HTML template with supplied data to build the plotf
-        '''
-        return Template(self.template).render(data=json.dumps(data).replace('"', "'"))
 
-    def plot_and_save(self, data, w=800, h=420, name='plot', overwrite=True):
+    def render(self, data, name, head=""):
         '''
-        save the rendered html to a file and returns an IFrame to dislay the plot in the notebook
+        render the HTML template with supplied data to build the plot
+        '''
+        return Template(head + self.template).render(name=name, data=json.dumps(data).replace('"', "'"))
+
+    def plot_and_save(self, data, w=800, h=420, name='chart', overwrite=True):
+        '''
+        save the rendered html to a file and returns an IFrame to display the plot in the notebook
         '''
         self.save(data, name, overwrite)
         return IFrame(name + '.html', w, h)
@@ -67,13 +77,13 @@ class C3Plotter(IPlotter):
         '''
         output an iframe containing the plot in the notebook without saving
         '''
-        return HTML(self.iframe_src.format(self.render(data=data), w, h))
+        return HTML(self.iframe.format(self.render(data=data, name="chart", head=self.head), w, h))
 
-    def save(self, data, name='plot', overwrite=True):
+    def save(self, data, name='chart', overwrite=True):
         '''
         save the rendered html to a file in the same directory as the notebook
         '''
-        html = self.render(data=data)
+        html = self.render(data=data, name=name, head=self.head)
         if overwrite:
             with open(name + '.html', 'w') as f:
                 f.write(html)
@@ -92,27 +102,30 @@ class PlotlyPlotter(IPlotter):
 
     def __init__(self):
         super(PlotlyPlotter, self).__init__()
-        self.template = '''
+
+        self.head = '''
                 <!-- Load d3.js and plotly.js -->
                 <script src='https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js'></script>
                 <script src='https://code.jquery.com/jquery-2.1.4.min.js'></script>
                 <script src='https://d14fo0winaifog.cloudfront.net/plotly-basic.js'></script>
-
-                <div id=chart></div>
-                <script>
-                    CHART = document.getElementById('chart');
-                    Plotly.plot(CHART, {{data}}, {{layout}});
-                </script>
-            '''
-
-    def render(self, data, layout=None):
         '''
-        render the HTML template with supplied data to build the plotf
-        '''
-        return Template(self.template).render(data=json.dumps(data).replace('"', "'"),
-                                              layout=json.dumps(layout).replace('"', "'"))
 
-    def plot_and_save(self, data, layout=None, w=800, h=420, name='plot', overwrite=True):
+        self.template = '''
+            <div id={{name}}></div>
+            <script>
+                var {{name}} = document.getElementById('{{name}}');
+                Plotly.plot({{name}}, {{data}}, {{layout}});
+            </script>
+        '''
+
+    def render(self, data, layout=None, name="chart", head=""):
+        '''
+        render the HTML template with supplied data to build the plot
+        '''
+        return Template(head + self.template).render(name=name, data=json.dumps(data).replace('"', "'"),
+                                                     layout=json.dumps(layout).replace('"', "'"))
+
+    def plot_and_save(self, data, layout=None, w=800, h=420, name='chart', overwrite=True):
         '''
         save the rendered html to a file and returns an IFrame to dislay the plot in the notebook
         '''
@@ -123,13 +136,13 @@ class PlotlyPlotter(IPlotter):
         '''
         output an iframe containing the plot in the notebook without saving
         '''
-        return HTML(self.iframe_src.format(self.render(data=data, layout=layout), w, h))
+        return HTML(self.iframe.format(self.render(data=data, layout=layout, name="chart", head=self.head), w, h))
 
-    def save(self, data, layout=None, name='plot', overwrite=True):
+    def save(self, data, layout=None, name='chart', overwrite=True):
         '''
         save the rendered html to a file in the same directory as the notebook
         '''
-        html = self.render(data=data, layout=layout)
+        html = self.render(data=data, layout=layout, name=name, head=self.head)
         if overwrite:
             with open(name + '.html', 'w') as f:
                 f.write(html)

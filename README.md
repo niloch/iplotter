@@ -1,13 +1,19 @@
 IPlotter
 =================
 
-##C3.js and plotly.js charting in ipython/jupyter notebooks
+## C3.js and plotly.js charting in ipython/jupyter notebooks
+
 
 - [Installation](#installation)
 - [C3.js](#c3js)
 - [plotly.js](#plotlyjs)
 - [Usage](#usage)
 - [Examples](#examples)
+    - [C3 Stacked Area Spline Chart](#c3-stacked-area-spline-chart)
+    - [plotly.js Grouped Bar Chart](#plotlyjs-grouped-bar-chart)
+    - [plotly.js HeatMap](#plotlyjs-heatmap)
+    - [Multple Charts](#multple-charts)
+
 
 iplotter is a simple package for generating interactive charts ipython/jupyter notebooks using C3.js or plotly.js from simple python data structures (dictionaries, lists, etc.)
 
@@ -63,7 +69,7 @@ plotter.plot(chart)
 ```python
 from iplotter.iplotter import PlotlyPlotter
 
-plotter2 = PlotlyPlotter()
+plotter = PlotlyPlotter()
 
 trace1 = {
   "x": ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
@@ -96,7 +102,7 @@ layout = {
   "barmode": 'group'
 }
 
-plotter2.plot(data,layout)
+plotter.plot(data,layout)
 ```
 ![Plot2](imgs/plot2.png?raw=true "Plot 2")
 
@@ -121,3 +127,57 @@ data = [{
 plotter.plot_and_save(data, w=600, h=600, name='heatmap1', overwrite=True)
 ```
 ![Plot3](imgs/plot3.png?raw=true "Plot 3")
+
+### Multple Charts
+
+Saving multiple charts to one file or displaying multiple charts in one iframe can be achieved by concatenating html strings returned by the render function, and the `head` attribute which contains the script tags for loading the JavasScript libraries.
+
+```python
+
+from iplotter.iplotter import PlotlyPlotter
+from IPython.display import HTML
+
+plotter = PlotlyPlotter()
+
+trace1 = {
+  "x": ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+  "y": [20, 14, 25, 16, 18, 22, 19, 15, 12, 16, 14, 17],
+  "type": 'bar',
+  "name": 'Item 1',
+  "marker": {
+    "color": 'rgb(49,130,189)',
+    "opacity": 0.7,
+  }
+}
+
+trace2 = {
+  "labels": ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+  "values": [19, 14, 22, 14, 16, 19, 15, 14, 10, 12, 12, 16],
+  "type": 'pie',
+  "name": 'Item 2',
+  "marker": {
+    "opacity": 0.7
+  }
+}
+
+charts = [
+    [trace1], 
+    [trace2]
+]
+
+# plotter.head will return the html string containing script tags for loading the plotly.js/C3.js libraries
+multiple_plot_html = plotter.head
+
+for i, chart in enumerate(charts):
+    multiple_plot_html += plotter.render(data=chart, name="chart_"+str(i))
+
+# Write multiple plots to file    
+with open("multiple_plots.html", 'w') as outfile:
+    outfile.write(multiple_plot_html)
+
+
+# display multiple plots in iframe   
+HTML(plotter.iframe.format(multiple_plot_html, 600, 900))  
+  
+```
+![Plot4](imgs/plot4.png?raw=true "Plot 4")
