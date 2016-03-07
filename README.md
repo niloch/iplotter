@@ -3,8 +3,6 @@ IPlotter
 
 ## JavaScript charting in ipython/jupyter notebooks
 
-<!-- MarkdownTOC -->
-
 - [Installation](#installation)
 - [C3.js](#c3js)
 - [plotly.js](#plotlyjs)
@@ -16,7 +14,6 @@ IPlotter
     - [Chart.js Radar Chart](#chartjs-radar-chart)
     - [Multple Charts and Mixing Libraries](#multple-charts-and-mixing-libraries)
 
-<!-- /MarkdownTOC -->
 
 iplotter is a simple package for generating interactive charts ipython/jupyter notebooks using popular JavaScript Libraries from python data structures (dictionaries, lists, etc.)
 

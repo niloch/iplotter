@@ -1,6 +1,5 @@
 from setuptools import setup
 from setuptools import find_packages
-import os
 
 from iplotter import __version__
 
@@ -8,7 +7,7 @@ if __name__ == '__main__':
 
     setup(name='iplotter',
           version=__version__,
-          description='C3.js and plotly.js for iPython/Jupyter notebooks',
+          description='JavaScript Charting for iPython/Jupyter notebooks',
           setup_requires=['setuptools-markdown'],
           long_description_markdown_filename='README.md',
           url='https://github.com/niloch/iplotter',
@@ -23,7 +22,7 @@ if __name__ == '__main__':
           ],
           zip_safe=False,
           include_package_data=True,
-          keywords=['ipython', 'plotly', 'c3', 'plot', 'chart'],
+          keywords=['ipython', 'plotly', 'c3.js', 'plot', 'chart', 'plotly.js', 'chart.js', 'jupyter'],
           classifiers=[
               'Development Status :: 3 - Alpha',
               'Intended Audience :: Science/Research',
