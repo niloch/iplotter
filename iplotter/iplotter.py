@@ -76,7 +76,7 @@ class C3Plotter(IPlotter):
             raise ValueError("Name {} is invalid. Only letters, numbers, '_', and '-' are permitted ".format(div_id))
 
         return Template(head + self.template).render(div_id=div_id.replace(" ", "_"),
-                                                     data=json.dumps(data).replace('"', "'"))
+                                                     data=json.dumps(data, indent=4).replace("'", "\\'").replace('"', "'"))
 
     def plot_and_save(self, data, w=800, h=420, filename='chart', overwrite=True):
         '''
@@ -138,8 +138,9 @@ class PlotlyPlotter(IPlotter):
             raise ValueError("Name {} is invalid. Only letters, numbers, '_', and '-' are permitted ".format(div_id))
 
         return Template(head + self.template).render(div_id=div_id.replace(" ", "_"),
-                                                     data=json.dumps(data).replace('"', "'"),
-                                                     layout=json.dumps(layout).replace('"', "'"))
+                                                     data=json.dumps(data, indent=4).replace(
+                                                         "'", "\\'").replace('"', "'"),
+                                                     layout=json.dumps(layout, indent=4).replace("'", "\\'").replace('"', "'"))
 
     def plot_and_save(self, data, layout=None, w=800, h=420, filename='chart', overwrite=True):
         '''
@@ -202,7 +203,8 @@ class ChartsJSPlotter(IPlotter):
             raise ValueError("Name {} is invalid. Only letters, numbers, '_', and '-' are permitted ".format(div_id))
 
         return Template(head + self.template).render(div_id=div_id.replace(" ", "_"),
-                                                     data=json.dumps(data).replace('"', "'"),
+                                                     data=json.dumps(data, indent=4).replace(
+                                                         "'", "\\'").replace('"', "'"),
                                                      chart_type=chart_type)
 
     def plot_and_save(self, data, chart_type, w=800, h=420, filename='chart', overwrite=True):
