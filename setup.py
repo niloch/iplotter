@@ -22,7 +22,7 @@ if __name__ == '__main__':
           ],
           zip_safe=False,
           include_package_data=True,
-          keywords=['ipython', 'plotly', 'c3.js', 'plot', 'chart', 'plotly.js', 'chart.js', 'jupyter'],
+          keywords=['ipython', 'plotly', 'c3.js', 'plot', 'chart', 'plotly.js', 'chart.js', 'chartist.js', 'jupyter'],
           classifiers=[
               'Development Status :: 3 - Alpha',
               'Intended Audience :: Science/Research',

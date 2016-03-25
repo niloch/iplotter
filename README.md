@@ -7,15 +7,16 @@ IPlotter
 - [C3.js](#c3js)
 - [plotly.js](#plotlyjs)
 - [Chart.js](#chartjs)
+- [Chartist.js](#chartistjs)
 - [Usage](#usage)
 - [Examples](#examples)
     - [C3 Stacked Area Spline Chart](#c3-stacked-area-spline-chart)
     - [plotly.js HeatMap](#plotlyjs-heatmap)
     - [Chart.js Radar Chart](#chartjs-radar-chart)
+    - [Chartist.js Bipolar Area Chart](#chartistjs-bipolar-area-chart)
     - [Multple Charts and Mixing Libraries](#multple-charts-and-mixing-libraries)
 
-
-iplotter is a simple package for generating interactive charts ipython/jupyter notebooks using popular JavaScript Libraries from python data structures (dictionaries, lists, etc.)
+iplotter is a simple package for generating interactive charts in ipython/jupyter notebooks using popular JavaScript Libraries from python data structures (dictionaries, lists, etc.)
 
 ## Installation
 To install the most recent stable release run `pip install iplotter`.
@@ -30,15 +31,19 @@ Charts have animated transitions for hiding/displaying data.
 
 ## [plotly.js](https://plot.ly/javascript/)
 
-Plotly.js is a charting library based on d3.js.  While plotly provides a native client in python, it requires the user to create an account and by default makes all plots public. plotly.js can be used without creating an account and are rendered locally to keep data private and rendered locally instead of remotely.
+Plotly.js is a charting library based on d3.js.  While plotly provides a native client in python, it requires the user to create an account and by default makes all plots public. plotly.js can be used without creating an account and are rendered locally to keep data private.
 
 ## [Chart.js](http://www.chartjs.org/)
 
-Chart.js provides 6 chart types with HTML5 canvas elements with tooltips/hover events in very lightweight library.
+Chart.js provides 6 chart types via HTML5 canvas elements with tooltips/hover events in very a lightweight library.
+
+## [Chartist.js](http://gionkunz.github.io/chartist-js/index.html)
+
+Simple and Responsive SVG charts with media queries and animations.
 
 ## Usage
 
-iplotter attempts to maintain a consistent API across JavaScript Libraries as much as possible, with slight parameter variations. Each library class supports the following functions: `render`, `plot`, `save`, `plot_and_save`. The python chart data,layout,options must be structured according to the JSON equivalent for each library (see [C3.js](http://c3js.org/), [plotly.js](https://plot.ly/javascript/), and [Chart.js](http://www.chartjs.org/) for more examples). Plots can be rendered in ipython notebooks and saved to the current directory as html files.
+iplotter attempts to maintain a consistent API across JavaScript Libraries as much as possible, with slight parameter variations. Each library class supports the following functions: `render`, `plot`, `save`, `plot_and_save`. The python chart data,layout,options must be structured according to the JSON equivalent for each library (see [C3.js](http://c3js.org/), [plotly.js](https://plot.ly/javascript/),[Chart.js](http://www.chartjs.org/) and, [Chartist.js](http://gionkunz.github.io/chartist-js/index.html) for more examples). Plots can be rendered in ipython notebooks and saved to the current directory as html files.
 
 ## Examples
 
@@ -137,6 +142,36 @@ data = {
 plotter.plot(data, chart_type="Radar", w=500, h= 500)
 ```
 ![Plot4](imgs/plot4.png?raw=true "Plot 4")
+
+### Chartist.js Bipolar Area Chart
+
+```python
+from iplotter.iplotter import ChartistPlotter
+
+plotter = ChartistPlotter()
+
+data = {
+    "labels": [1, 2, 3, 4, 5, 6, 7, 8],
+    "series": [
+              [1, 2, 3, 1, -2, 0, 1, 0],
+        [-2, -1, -2, -1, -2.5, -1, -2, -1],
+        [0, 0, 0, 1, 2, 2.5, 2, 1],
+        [2.5, 2, 1, 0.5, 1, 0.5, -1, -2.5]
+    ]
+}
+options = {
+    "high": 4,
+    "low": -3,
+    "showArea": True,
+    "showLine": False,
+    "showPoint": False,
+    "height": 420,
+    "width": 700
+}
+
+plotter.save(data, "Line", options)
+```
+![Plot6](imgs/plot6.png?raw=true "Plot 6")
 
 ### Multple Charts and Mixing Libraries
 
