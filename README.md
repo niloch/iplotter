@@ -8,12 +8,14 @@ IPlotter
 - [plotly.js](#plotlyjs)
 - [Chart.js](#chartjs)
 - [Chartist.js](#chartistjs)
+- [Google Charts](#google-charts)
 - [Usage](#usage)
 - [Examples](#examples)
     - [C3 Stacked Area Spline Chart](#c3-stacked-area-spline-chart)
     - [plotly.js HeatMap](#plotlyjs-heatmap)
     - [Chart.js Radar Chart](#chartjs-radar-chart)
     - [Chartist.js Bipolar Area Chart](#chartistjs-bipolar-area-chart)
+    - [Google Charts stacked Column Chart](#google-charts-stacked-column-chart)
     - [Multple Charts and Mixing Libraries](#multple-charts-and-mixing-libraries)
 
 iplotter is a simple package for generating interactive charts in ipython/jupyter notebooks using popular JavaScript Libraries from python data structures (dictionaries, lists, etc.)
@@ -40,6 +42,10 @@ Chart.js provides 6 chart types via HTML5 canvas elements with tooltips/hover ev
 ## [Chartist.js](http://gionkunz.github.io/chartist-js/index.html)
 
 Simple and Responsive SVG charts with media queries and animations.
+
+## [Google Charts](https://developers.google.com/chart/)
+
+Simple and Powerful interactive charts with SVG/VML formats.
 
 ## Usage
 
@@ -172,6 +178,32 @@ options = {
 plotter.save(data, "Line", options)
 ```
 ![Plot6](imgs/plot6.png?raw=true "Plot 6")
+
+### Google Charts stacked Column Chart
+```python
+from iplotter.iplotter import GCPlotter
+
+plotter = GCPlotter()
+
+data = [
+    ['Genre', 'Fantasy & Sci Fi', 'Romance', 'Mystery/Crime', 'General',
+     'Western', 'Literature', {"role": 'annotation'}],
+    ['2010', 10, 24, 20, 32, 18, 5, ''],
+    ['2020', 16, 22, 23, 30, 16, 9, ''],
+    ['2030', 28, 19, 29, 30, 12, 13, '']
+]
+
+options = {
+    "width": 600,
+    "height": 400,
+    "legend": {"position": 'top', "maxLines": 3},
+    "bar": {"groupWidth": '75%'},
+    "isStacked": "true",
+}
+
+plotter.plot(data, "column", options)
+```
+![Plot7](imgs/plot7.png?raw=true "Plot 7")
 
 ### Multple Charts and Mixing Libraries
 
