@@ -2,7 +2,7 @@ from jinja2 import Template
 from IPython.display import IFrame, HTML
 import os
 import json
-import IPlotter
+from .iplotter import IPlotter
 
 
 class C3Plotter(IPlotter):
