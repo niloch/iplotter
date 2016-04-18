@@ -175,7 +175,7 @@ options = {
     "width": 700
 }
 
-plotter.save(data, "Line", options)
+plotter.save(data, chart_type="Line", options)
 ```
 ![Plot6](imgs/plot6.png?raw=true "Plot 6")
 
@@ -201,7 +201,7 @@ options = {
     "isStacked": "true",
 }
 
-plotter.plot(data, "column", options)
+plotter.plot(data, chart_type="column", options)
 ```
 ![Plot7](imgs/plot7.png?raw=true "Plot 7")
 
