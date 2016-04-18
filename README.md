@@ -56,7 +56,7 @@ iplotter attempts to maintain a consistent API across JavaScript Libraries as mu
 ### C3 Stacked Area Spline Chart
 
 ```python
-from iplotter.iplotter import C3Plotter
+from iplotter import C3Plotter
 
 plotter = C3Plotter()
 
@@ -83,7 +83,7 @@ plotter.plot(chart)
 ### plotly.js HeatMap
 
 ```python
-from iplotter.iplotter import PlotlyPlotter
+from iplotter import PlotlyPlotter
 
 plotter = PlotlyPlotter()
 
@@ -115,7 +115,7 @@ plotter.plot_and_save(data, layout=layout, w=600, h=600, filename='heatmap1', ov
 ### Chart.js Radar Chart
 
 ```python
-from iplotter.iplotter import ChartsJSPlotter
+from iplotter import ChartsJSPlotter
 
 plotter = ChartsJSPlotter()
 
@@ -152,7 +152,7 @@ plotter.plot(data, chart_type="Radar", w=500, h= 500)
 ### Chartist.js Bipolar Area Chart
 
 ```python
-from iplotter.iplotter import ChartistPlotter
+from iplotter import ChartistPlotter
 
 plotter = ChartistPlotter()
 
@@ -181,7 +181,7 @@ plotter.save(data, "Line", options)
 
 ### Google Charts stacked Column Chart
 ```python
-from iplotter.iplotter import GCPlotter
+from iplotter import GCPlotter
 
 plotter = GCPlotter()
 
@@ -210,7 +210,7 @@ plotter.plot(data, "column", options)
 Saving multiple charts to one file or displaying multiple charts in one iframe can be achieved by concatenating html strings returned by the render function. The plotter's `head` attribute contains the script tags for loading the necessary JavasScript libraries and `div_ids` must be unique.  Charts from different libraries can be mixed together.
 
 ```python
-from iplotter.iplotter import PlotlyPlotter, C3Plotter
+from iplotter import PlotlyPlotter, C3Plotter
 from IPython.display import HTML
 
 plotly_plotter = PlotlyPlotter()
