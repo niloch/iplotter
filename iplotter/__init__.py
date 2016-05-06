@@ -1,4 +1,4 @@
-__version__ = '0.3.0'
+__version__ = '0.3.1'
 
 from .iplotter import IPlotter
 from .c3_plotter import C3Plotter
