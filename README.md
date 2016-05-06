@@ -80,7 +80,7 @@ chart = {
 
 plotter.plot(chart)
 ```
-![Plot1](imgs/plot1.png?raw=true "Plot 1")
+![Plot1](https://github.com/niloch/iplotter/blob/master/imgs/plot1.png?raw=true "Plot 1")
 
 ### plotly.js HeatMap
 
@@ -111,7 +111,7 @@ layout = {
 
 plotter.plot_and_save(data, layout=layout, w=600, h=600, filename='heatmap1', overwrite=True)
 ```
-![Plot3](imgs/plot3.png?raw=true "Plot 3")
+![Plot3](https://github.com/niloch/iplotter/blob/master/imgs/plot3.png?raw=true "Plot 3")
 
 
 ### Chart.js Radar Chart
@@ -149,7 +149,7 @@ data = {
 
 plotter.plot(data, chart_type="Radar", w=500, h= 500)
 ```
-![Plot4](imgs/plot4.png?raw=true "Plot 4")
+![Plot4](https://github.com/niloch/iplotter/blob/master/imgs/plot4.png?raw=true "Plot 4")
 
 ### Chartist.js Bipolar Area Chart
 
@@ -179,7 +179,7 @@ options = {
 
 plotter.save(data, chart_type="Line", options)
 ```
-![Plot6](imgs/plot6.png?raw=true "Plot 6")
+![Plot6](https://github.com/niloch/iplotter/blob/master/imgs/plot6.png?raw=true "Plot 6")
 
 ### Google Charts stacked Column Chart
 ```python
@@ -205,7 +205,7 @@ options = {
 
 plotter.plot(data, chart_type="column", options)
 ```
-![Plot7](imgs/plot7.png?raw=true "Plot 7")
+![Plot7](https://github.com/niloch/iplotter/blob/master/imgs/plot7.png?raw=true "Plot 7")
 
 ### Multple Charts and Mixing Libraries
 
@@ -290,4 +290,4 @@ HTML(c3_plotter.iframe.format(source=multiple_plot_html, w=600, h=900))
 with open("multiple_plots.html", 'w') as outfile:
     outfile.write(multiple_plot_html)
 ```
-![Plot5](imgs/plot5.png?raw=true "Plot 5")
+![Plot5](https://github.com/niloch/iplotter/blob/master/imgs/plot5.png?raw=true "Plot 5")
