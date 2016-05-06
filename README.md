@@ -1,6 +1,8 @@
 IPlotter
 =================
 
+[![PyPI version](https://badge.fury.io/py/iplotter.svg)](https://badge.fury.io/py/iplotter)
+
 ## JavaScript charting in ipython/jupyter notebooks
 
 - [Installation](#installation)
