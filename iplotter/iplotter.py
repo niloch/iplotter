@@ -28,8 +28,8 @@ class IPlotter(object):
 
     @abstractmethod
     def save(self):
-        return NotImplemented()
+        return NotImplementedError()
 
     @abstractmethod
     def plot_and_save(self):
-        return NotImplemented
+        return NotImplementedError()

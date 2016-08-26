@@ -35,20 +35,31 @@ class GCPlotter(IPlotter):
         </script>
     '''
 
-    def render(self, data, chart_type, options=None,  div_id="chart", head=""):
+    def render(self, data, chart_type, options=None, div_id="chart", head=""):
         '''
         render the data in HTML template
         '''
         if not self.valid_name(div_id):
-            raise ValueError("Name {} is invalid. Only letters, numbers, '_', and '-' are permitted ".format(div_id))
+            raise ValueError(
+                "Name {} is invalid. Only letters, numbers, '_', and '-' are permitted ".format(
+                    div_id))
 
-        return Template(head + self.template).render(div_id=div_id.replace(" ", "_"),
-                                                     data=json.dumps(data, indent=4).replace("'", "\\'")
-                                                     .replace('"', "'"), chart_type=chart_type,
-                                                     options=json.dumps(options, indent=4).replace("'", "\\'")
-                                                     .replace('"', "'"))
+        return Template(head + self.template).render(
+            div_id=div_id.replace(" ", "_"),
+            data=json.dumps(
+                data, indent=4).replace("'", "\\'").replace('"', "'"),
+            chart_type=chart_type,
+            options=json.dumps(
+                options, indent=4).replace("'", "\\'").replace('"', "'"))
 
-    def plot_and_save(self, data, chart_type, options=None, w=800, h=420, filename='chart', overwrite=True):
+    def plot_and_save(self,
+                      data,
+                      chart_type,
+                      options=None,
+                      w=800,
+                      h=420,
+                      filename='chart',
+                      overwrite=True):
         '''
         save the rendered html to a file and return an IFrame to display the plot in the notebook
         '''
@@ -59,13 +70,31 @@ class GCPlotter(IPlotter):
         '''
         output an iframe containing the plot in the notebook without saving
         '''
-        return HTML(self.iframe.format(source=self.render(data=data, options=options, chart_type=chart_type, head=self.head), w=w, h=h))
+        return HTML(
+            self.iframe.format(
+                source=self.render(
+                    data=data,
+                    options=options,
+                    chart_type=chart_type,
+                    head=self.head),
+                w=w,
+                h=h))
 
-    def save(self, data, chart_type, options=None, filename='chart', overwrite=True):
+    def save(self,
+             data,
+             chart_type,
+             options=None,
+             filename='chart',
+             overwrite=True):
         '''
         save the rendered html to a file in the same directory as the notebook
         '''
-        html = self.render(data=data, chart_type=chart_type, options=options, div_id=filename, head=self.head)
+        html = self.render(
+            data=data,
+            chart_type=chart_type,
+            options=options,
+            div_id=filename,
+            head=self.head)
 
         if overwrite:
             with open(filename.replace(" ", "_") + '.html', 'w') as f:

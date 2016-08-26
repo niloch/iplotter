@@ -6,7 +6,6 @@ from .iplotter import IPlotter
 
 
 class C3Plotter(IPlotter):
-
     """
     Class for creating c3.js charts in ipython notebook
     """
@@ -39,12 +38,21 @@ class C3Plotter(IPlotter):
         render the data in HTML template
         '''
         if not self.valid_name(div_id):
-            raise ValueError("Name {} is invalid. Only letters, numbers, '_', and '-' are permitted ".format(div_id))
+            raise ValueError(
+                "Name {} is invalid. Only letters, numbers, '_', and '-' are permitted ".format(
+                    div_id))
 
-        return Template(head + self.template).render(div_id=div_id.replace(" ", "_"),
-                                                     data=json.dumps(data, indent=4).replace("'", "\\'").replace('"', "'"))
+        return Template(head + self.template).render(
+            div_id=div_id.replace(" ", "_"),
+            data=json.dumps(
+                data, indent=4).replace("'", "\\'").replace('"', "'"))
 
-    def plot_and_save(self, data, w=800, h=420, filename='chart', overwrite=True):
+    def plot_and_save(self,
+                      data,
+                      w=800,
+                      h=420,
+                      filename='chart',
+                      overwrite=True):
         '''
         save the rendered html to a file and returns an IFrame to display the plot in the notebook
         '''
@@ -55,7 +63,12 @@ class C3Plotter(IPlotter):
         '''
         output an iframe containing the plot in the notebook without saving
         '''
-        return HTML(self.iframe.format(source=self.render(data=data, div_id="chart", head=self.head), w=w, h=h))
+        return HTML(
+            self.iframe.format(
+                source=self.render(
+                    data=data, div_id="chart", head=self.head),
+                w=w,
+                h=h))
 
     def save(self, data, filename='chart', overwrite=True):
         '''
