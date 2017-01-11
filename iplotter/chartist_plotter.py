@@ -2,7 +2,7 @@ from jinja2 import Template
 from IPython.display import IFrame, HTML
 import os
 import json
-from .iplotter import IPlotter
+from base_plotter import IPlotter
 
 
 class ChartistPlotter(IPlotter):
@@ -10,27 +10,27 @@ class ChartistPlotter(IPlotter):
     Class for creating chartist.js charts in ipython  notebook
     """
 
+    head = '''
+        <!-- Load Chartist.js -->
+        <link rel='stylesheet' href='https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.css'>
+        <script src='https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.js'></script>
+    '''
+
+    template = '''
+        <div id={{div_id}} class='ct-chart' style='width: 100%; height: 100%' ></div>
+        <script>
+            new Chartist.{{chart_type}}('#{{div_id}}', {{data}}, {{options}});
+        </script>
+    '''
+
     def __init__(self):
         super(ChartistPlotter, self).__init__()
-
-        self.head = '''
-                <!-- Load Chartist.js -->
-                <link rel='stylesheet' href='https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.css'>
-                <script src='https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.js'></script>
-        '''
-
-        self.template = '''
-             <div id={{div_id}} class='ct-chart' style='width: 100%; height: 100%' ></div>
-            <script>
-                new Chartist.{{chart_type}}('#{{div_id}}', {{data}}, {{options}});
-            </script>
-        '''
 
     def render(self, data, chart_type, options=None, div_id="chart", head=""):
         '''
         render the data in HTML template
         '''
-        if not self.valid_name(div_id):
+        if not self.is_valid_name(div_id):
             raise ValueError(
                 "Name {} is invalid. Only letters, numbers, '_', and '-' are permitted ".format(
                     div_id))

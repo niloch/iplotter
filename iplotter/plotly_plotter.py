@@ -2,7 +2,7 @@ from jinja2 import Template
 from IPython.display import IFrame, HTML
 import os
 import json
-from .iplotter import IPlotter
+from base_plotter import IPlotter
 
 
 class PlotlyPlotter(IPlotter):
@@ -10,29 +10,29 @@ class PlotlyPlotter(IPlotter):
     Class for creating plotly.js charts in ipython  notebook
     """
 
+    head = '''
+        <!-- Load d3.js and plotly.js -->
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js'></script>
+        <script src='https://code.jquery.com/jquery-2.1.4.min.js'></script>
+        <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
+    '''
+
+    template = '''
+        <div id={{div_id}} style='width: 100%; height: 100%' ></div>
+        <script>
+            var {{div_id}} = document.getElementById('{{div_id}}');
+            Plotly.plot({{div_id}}, {{data}}, {{layout}});
+        </script>
+    '''
+
     def __init__(self):
         super(PlotlyPlotter, self).__init__()
-
-        self.head = '''
-                <!-- Load d3.js and plotly.js -->
-                <script src='https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js'></script>
-                <script src='https://code.jquery.com/jquery-2.1.4.min.js'></script>
-                <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
-        '''
-
-        self.template = '''
-            <div id={{div_id}} style='width: 100%; height: 100%' ></div>
-            <script>
-                var {{div_id}} = document.getElementById('{{div_id}}');
-                Plotly.plot({{div_id}}, {{data}}, {{layout}});
-            </script>
-        '''
 
     def render(self, data, layout=None, div_id="chart", head=""):
         '''
         render the data in HTML template
         '''
-        if not self.valid_name(div_id):
+        if not self.is_valid_name(div_id):
             raise ValueError(
                 "Name {} is invalid. Only letters, numbers, '_', and '-' are permitted ".format(
                     div_id))

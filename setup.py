@@ -1,7 +1,7 @@
 from setuptools import setup
 from setuptools import find_packages
 
-from iplotter import __version__
+__version__ = '0.3.1'
 
 if __name__ == '__main__':
 
@@ -34,4 +34,5 @@ if __name__ == '__main__':
             'Programming Language :: Python :: 3.3',
             'Programming Language :: Python :: 3.4',
             'Programming Language :: Python :: 3.5',
+            'Programming Language :: Python :: 3.6',
         ])

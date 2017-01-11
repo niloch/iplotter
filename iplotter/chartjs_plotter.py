@@ -2,7 +2,7 @@ from jinja2 import Template
 from IPython.display import IFrame, HTML
 import os
 import json
-from .iplotter import IPlotter
+from base_plotter import IPlotter
 
 
 class ChartsJSPlotter(IPlotter):
@@ -10,29 +10,29 @@ class ChartsJSPlotter(IPlotter):
     Class for creating charts.js charts in ipython  notebook
     """
 
+    head = '''
+        <!-- Load Charts.js -->
+       <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js'></script>
+    '''
+
+    template = '''
+        <canvas id='{{div_id}}'></canvas>
+        <script>
+            var ctx = document.getElementById('{{div_id}}').getContext('2d');
+            ctx.canvas.width  = window.innerWidth;
+            ctx.canvas.height = window.innerHeight;
+            var myNewChart = new Chart(ctx).{{chart_type}}({{data}});
+        </script>
+    '''
+
     def __init__(self):
         super(ChartsJSPlotter, self).__init__()
-
-        self.head = '''
-                <!-- Load Charts.js -->
-               <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js'></script>
-        '''
-
-        self.template = '''
-            <canvas id='{{div_id}}'></canvas>
-            <script>
-                var ctx = document.getElementById('{{div_id}}').getContext('2d');
-                ctx.canvas.width  = window.innerWidth;
-                ctx.canvas.height = window.innerHeight;
-                var myNewChart = new Chart(ctx).{{chart_type}}({{data}});
-            </script>
-        '''
 
     def render(self, data, chart_type, div_id="chart", head=""):
         '''
         render the data in HTML template
         '''
-        if not self.valid_name(div_id):
+        if not self.is_valid_name(div_id):
             raise ValueError(
                 "Name {} is invalid. Only letters, numbers, '_', and '-' are permitted ".format(
                     div_id))

@@ -2,7 +2,7 @@ from jinja2 import Template
 from IPython.display import IFrame, HTML
 import os
 import json
-from .iplotter import IPlotter
+from base_plotter import IPlotter
 
 
 class C3Plotter(IPlotter):
@@ -10,34 +10,34 @@ class C3Plotter(IPlotter):
     Class for creating c3.js charts in ipython notebook
     """
 
+    head = '''
+        <!-- Load c3.css -->
+        <link href='https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.10/c3.min.css' rel='stylesheet' type='text/css'/>
+
+        <!-- Load d3.js and c3.js -->
+        <script src='http://d3js.org/d3.v3.min.js' charset='utf-8'></script>
+        <script src='http://cdnjs.cloudflare.com/ajax/libs/c3/0.4.10/c3.min.js'></script>
+
+    '''
+
+    template = '''
+        <div id={{div_id}} style='width: 100%; height: 100%'></div>
+        <script>
+            var {{div_id}} = document.getElementById('{{div_id}}');
+            var data = {{data}};
+            data['bindto']='#{{div_id}}'
+            c3.generate(data);
+        </script>
+    '''
+
     def __init__(self):
         super(C3Plotter, self).__init__()
-
-        self.head = '''
-            <!-- Load c3.css -->
-            <link href='https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.10/c3.min.css' rel='stylesheet' type='text/css'/>
-
-            <!-- Load d3.js and c3.js -->
-            <script src='http://d3js.org/d3.v3.min.js' charset='utf-8'></script>
-            <script src='http://cdnjs.cloudflare.com/ajax/libs/c3/0.4.10/c3.min.js'></script>
-
-        '''
-
-        self.template = '''
-            <div id={{div_id}} style='width: 100%; height: 100%'></div>
-            <script>
-                var {{div_id}} = document.getElementById('{{div_id}}');
-                var data = {{data}};
-                data['bindto']='#{{div_id}}'
-                c3.generate(data);
-            </script>
-        '''
 
     def render(self, data, div_id="chart", head=""):
         '''
         render the data in HTML template
         '''
-        if not self.valid_name(div_id):
+        if not self.is_valid_name(div_id):
             raise ValueError(
                 "Name {} is invalid. Only letters, numbers, '_', and '-' are permitted ".format(
                     div_id))

@@ -1,0 +1,52 @@
+from abc import ABCMeta, abstractmethod
+import re
+
+
+class IPlotter(object):
+    """Abstract IPlotter"""
+
+    __metaclass__ = ABCMeta
+
+    def __init__(self):
+        super(IPlotter, self).__init__()
+        iframe = '<iframe srcdoc="{source}" src="" width="{w}" height="{h}" sandbox="allow-scripts"></iframe>'
+        invalid_name_pattern = re.compile(r'[^a-zA-Z0-9_\-\. ]+')
+
+    @classmethod
+    def is_valid_name(cls, name):
+        '''
+        check whether plot div id or filenname are valid
+        '''
+        if (cls.invalid_name_pattern.search(name)):
+            return False
+        else:
+            return True
+
+    @abstractmethod
+    def render(self):
+        '''
+        render the data in HTML template
+        '''
+        pass
+
+    @abstractmethod
+    def plot(self):
+        '''
+        output an iframe containing the plot in the notebook without saving
+        '''
+        pass
+
+    @abstractmethod
+    def save(self):
+        '''
+        save the rendered html to a file in the same directory as the notebook
+        '''
+        pass
+
+    @abstractmethod
+    def plot_and_save(self):
+        '''
+        save the rendered html to a file and return an IFrame to display the
+        plot in the notebook
+        '''
+        pass
