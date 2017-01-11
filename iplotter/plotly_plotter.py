@@ -2,7 +2,7 @@ from jinja2 import Template
 from IPython.display import IFrame, HTML
 import os
 import json
-from base_plotter import IPlotter
+from .base_plotter import IPlotter
 
 
 class PlotlyPlotter(IPlotter):

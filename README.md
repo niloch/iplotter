@@ -5,56 +5,69 @@ IPlotter
 
 ## JavaScript charting in ipython/jupyter notebooks
 
-- [Installation](#installation)
-- [C3.js](#c3js)
-- [plotly.js](#plotlyjs)
-- [Chart.js](#chartjs)
-- [Chartist.js](#chartistjs)
-- [Google Charts](#google-charts)
-- [Usage](#usage)
-- [Examples](#examples)
-    - [C3 Stacked Area Spline Chart](#c3-stacked-area-spline-chart)
-    - [plotly.js HeatMap](#plotlyjs-heatmap)
-    - [Chart.js Radar Chart](#chartjs-radar-chart)
-    - [Chartist.js Bipolar Area Chart](#chartistjs-bipolar-area-chart)
-    - [Google Charts stacked Column Chart](#google-charts-stacked-column-chart)
-    - [Multple Charts and Mixing Libraries](#multple-charts-and-mixing-libraries)
+<!-- MarkdownTOC -->
+
+1. [Installation](#installation)
+1. [C3.js](#c3js)
+1. [plotly.js](#plotlyjs)
+1. [Chart.js](#chartjs)
+1. [Chartist.js](#chartistjs)
+1. [Google Charts](#google-charts)
+1. [Usage](#usage)
+1. [Examples](#examples)
+    1. [C3 Stacked Area Spline Chart](#c3-stacked-area-spline-chart)
+    1. [plotly.js HeatMap](#plotlyjs-heatmap)
+    1. [Chart.js Radar Chart](#chartjs-radar-chart)
+    1. [Chartist.js Bipolar Area Chart](#chartistjs-bipolar-area-chart)
+    1. [Google Charts stacked Column Chart](#google-charts-stacked-column-chart)
+    1. [Multple Charts and Mixing Libraries](#multple-charts-and-mixing-libraries)
+
+<!-- /MarkdownTOC -->
 
 iplotter is a simple package for generating interactive charts in ipython/jupyter notebooks using popular JavaScript Libraries from python data structures (dictionaries, lists, etc.)
 
+<a name="installation"></a>
 ## Installation
 To install the most recent stable release run `pip install iplotter`.
 
 To install the latest version run `pip install git+git://github.com/niloch/iplotter.git@master` or
 `git clone https://github.com/niloch/iplotter.git` followed by `pip install -e iplotter/`
 
+<a name="c3js"></a>
 ## [C3.js](http://c3js.org/)
 
 C3 is a charting library based on d3.js for making interactive and easy to understand charts, graphs, and plots.
 Charts have animated transitions for hiding/displaying data.
 
+<a name="plotlyjs"></a>
 ## [plotly.js](https://plot.ly/javascript/)
 
 Plotly.js is a charting library based on d3.js.  While plotly provides a native client in python, it requires the user to create an account and by default makes all plots public. plotly.js can be used without creating an account and are rendered locally to keep data private.
 
+<a name="chartjs"></a>
 ## [Chart.js](http://www.chartjs.org/)
 
 Chart.js provides 6 chart types via HTML5 canvas elements with tooltips/hover events in very a lightweight library.
 
+<a name="chartistjs"></a>
 ## [Chartist.js](http://gionkunz.github.io/chartist-js/index.html)
 
 Simple and Responsive SVG charts with media queries and animations.
 
+<a name="google-charts"></a>
 ## [Google Charts](https://developers.google.com/chart/)
 
 Simple and Powerful interactive charts with SVG/VML formats.
 
+<a name="usage"></a>
 ## Usage
 
 iplotter attempts to maintain a consistent API across JavaScript Libraries as much as possible, with slight parameter variations. Each library class supports the following functions: `render`, `plot`, `save`, `plot_and_save`. The python chart data,layout,options must be structured according to the JSON equivalent for each library (see [C3.js](http://c3js.org/), [plotly.js](https://plot.ly/javascript/),[Chart.js](http://www.chartjs.org/) and, [Chartist.js](http://gionkunz.github.io/chartist-js/index.html) for more examples). Plots can be rendered in ipython notebooks and saved to the current directory as html files.
 
+<a name="examples"></a>
 ## Examples
 
+<a name="c3-stacked-area-spline-chart"></a>
 ### C3 Stacked Area Spline Chart
 
 ```python
@@ -82,6 +95,7 @@ plotter.plot(chart)
 ```
 ![Plot1](https://github.com/niloch/iplotter/blob/master/imgs/plot1.png?raw=true "Plot 1")
 
+<a name="plotlyjs-heatmap"></a>
 ### plotly.js HeatMap
 
 ```python
@@ -114,6 +128,7 @@ plotter.plot_and_save(data, layout=layout, w=600, h=600, filename='heatmap1', ov
 ![Plot3](https://github.com/niloch/iplotter/blob/master/imgs/plot3.png?raw=true "Plot 3")
 
 
+<a name="chartjs-radar-chart"></a>
 ### Chart.js Radar Chart
 
 ```python
@@ -151,6 +166,7 @@ plotter.plot(data, chart_type="Radar", w=500, h= 500)
 ```
 ![Plot4](https://github.com/niloch/iplotter/blob/master/imgs/plot4.png?raw=true "Plot 4")
 
+<a name="chartistjs-bipolar-area-chart"></a>
 ### Chartist.js Bipolar Area Chart
 
 ```python
@@ -181,6 +197,7 @@ plotter.save(data, chart_type="Line", options)
 ```
 ![Plot6](https://github.com/niloch/iplotter/blob/master/imgs/plot6.png?raw=true "Plot 6")
 
+<a name="google-charts-stacked-column-chart"></a>
 ### Google Charts stacked Column Chart
 ```python
 from iplotter import GCPlotter
@@ -207,6 +224,7 @@ plotter.plot(data, chart_type="column", options)
 ```
 ![Plot7](https://github.com/niloch/iplotter/blob/master/imgs/plot7.png?raw=true "Plot 7")
 
+<a name="multple-charts-and-mixing-libraries"></a>
 ### Multple Charts and Mixing Libraries
 
 Saving multiple charts to one file or displaying multiple charts in one iframe can be achieved by concatenating html strings returned by the render function. The plotter's `head` attribute contains the script tags for loading the necessary JavasScript libraries and `div_ids` must be unique.  Charts from different libraries can be mixed together.
