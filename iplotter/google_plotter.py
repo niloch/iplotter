@@ -17,14 +17,14 @@ class GCPlotter(IPlotter):
     template = '''
         <div id={{div_id}} style='width: 100%; height: 100%' ></div>
         <script type='text/javascript'>
-            google.charts.load('current', {'packages':['corechart']});
+            google.charts.load('current', {'packages':['{{ chart_package}}']});
             google.charts.setOnLoadCallback(drawChart);
 
             function drawChart() {
                 var data = google.visualization.arrayToDataTable({{data}}
                 );
 
-                var chart = new google.visualization.{{chart_type|title}}Chart(document.getElementById('{{div_id}}'));
+                var chart = new google.visualization.{{chart_type}}(document.getElementById('{{div_id}}'));
 
                 chart.draw(data, {{options}});
             }
@@ -34,7 +34,13 @@ class GCPlotter(IPlotter):
     def __init__(self):
         super(GCPlotter, self).__init__()
 
-    def render(self, data, chart_type, options=None, div_id="chart", head=""):
+    def render(self,
+               data,
+               chart_type,
+               chart_package='corechart',
+               options=None,
+               div_id="chart",
+               head=""):
         '''
         render the data in HTML template
         '''
@@ -48,12 +54,14 @@ class GCPlotter(IPlotter):
             data=json.dumps(
                 data, indent=4).replace("'", "\\'").replace('"', "'"),
             chart_type=chart_type,
+            chart_package=chart_package,
             options=json.dumps(
                 options, indent=4).replace("'", "\\'").replace('"', "'"))
 
     def plot_and_save(self,
                       data,
                       chart_type,
+                      chart_package='corechart',
                       options=None,
                       w=800,
                       h=420,
@@ -62,10 +70,17 @@ class GCPlotter(IPlotter):
         '''
         save the rendered html to a file and return an IFrame to display the plot in the notebook
         '''
-        self.save(data, chart_type, options, filename, overwrite)
+        self.save(data, chart_type, chart_package, options, filename,
+                  overwrite)
         return IFrame(filename + '.html', w, h)
 
-    def plot(self, data, chart_type, options=None, w=800, h=420):
+    def plot(self,
+             data,
+             chart_type,
+             chart_package='corechart',
+             options=None,
+             w=800,
+             h=420):
         '''
         output an iframe containing the plot in the notebook without saving
         '''
@@ -75,6 +90,7 @@ class GCPlotter(IPlotter):
                     data=data,
                     options=options,
                     chart_type=chart_type,
+                    chart_package=chart_package,
                     head=self.head),
                 w=w,
                 h=h))
@@ -82,6 +98,7 @@ class GCPlotter(IPlotter):
     def save(self,
              data,
              chart_type,
+             chart_package='corechart',
              options=None,
              filename='chart',
              overwrite=True):
@@ -91,6 +108,7 @@ class GCPlotter(IPlotter):
         html = self.render(
             data=data,
             chart_type=chart_type,
+            chart_package=chart_package,
             options=options,
             div_id=filename,
             head=self.head)

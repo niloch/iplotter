@@ -5,7 +5,7 @@ import json
 from .base_plotter import IPlotter
 
 
-class ChartsJSPlotter(IPlotter):
+class ChartJSPlotter(IPlotter):
     """
     Class for creating charts.js charts in ipython  notebook
     """
@@ -26,7 +26,7 @@ class ChartsJSPlotter(IPlotter):
     '''
 
     def __init__(self):
-        super(ChartsJSPlotter, self).__init__()
+        super(ChartJSPlotter, self).__init__()
 
     def render(self, data, chart_type, div_id="chart", head=""):
         '''

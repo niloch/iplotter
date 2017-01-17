@@ -17,12 +17,12 @@ if __name__ == '__main__':
         license='MIT',
         packages=find_packages(),
         install_requires=[
-            'Jinja2>=2.0', 'ipython>=3.0', 'notebook>=3.0'
+            'Jinja2>=2.0', 'ipython>=3.0', 'notebook>=3.0', 'selenium>=3.0'
         ],
         zip_safe=False,
         include_package_data=True,
         keywords=['ipython', 'plotly', 'c3.js', 'plot', 'chart', 'plotly.js',
-                  'chart.js', 'chartist.js', 'jupyter'],
+                  'charts.js', 'chartist.js', 'jupyter'],
         classifiers=[
             'Development Status :: 3 - Alpha',
             'Intended Audience :: Science/Research',
