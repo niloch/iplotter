@@ -5,4 +5,4 @@ from .plotly_plotter import PlotlyPlotter
 from .chartjs_plotter import ChartJSPlotter
 from .chartist_plotter import ChartistPlotter
 from .google_plotter import GCPlotter
-__version__ = '0.4.0'
+__version__ = '0.4.1'
