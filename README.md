@@ -333,7 +333,7 @@ plotter2 = ChartJSPlotter()
 ####  specify data for charts here...
 
 plotter1.save(data1, filename="chart1")  # save first plot to chart1.html
-plotter2.dave(data2, filename="chart2")  # save second plot to chart2.html
+plotter2.save(data2, filename="chart2")  # save second plot to chart2.html
 
 charts = ["chart1", "chart2"]
 
