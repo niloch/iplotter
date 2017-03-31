@@ -19,8 +19,8 @@ class ChartJSPlotter(IPlotter):
         <canvas id='{{div_id}}'></canvas>
         <script>
             var ctx = document.getElementById('{{div_id}}').getContext('2d');
-            ctx.canvas.width  = window.innerWidth;
-            ctx.canvas.height = window.innerHeight;
+            ctx.canvas.width  = window.innerWidth - (.05 * window.innerWidth);
+            ctx.canvas.height = window.innerHeight - (.05 * window.innerHeight);
             var myNewChart = new Chart(ctx).{{chart_type}}({{data}});
         </script>
     '''
