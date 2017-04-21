@@ -2,6 +2,8 @@ IPlotter
 =================
 
 [![PyPI version](https://badge.fury.io/py/iplotter.svg)](https://badge.fury.io/py/iplotter)
+[![PyPI](https://img.shields.io/pypi/pyversions/iplotter.svg)]()
+[![PyPI](https://img.shields.io/pypi/dm/iplotter.svg)]()
 
 ## JavaScript charting in ipython/jupyter notebooks
 

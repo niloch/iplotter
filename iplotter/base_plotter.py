@@ -9,7 +9,7 @@ class IPlotter(object):
     """Abstract IPlotter"""
 
     __metaclass__ = ABCMeta
-    iframe = '<iframe srcdoc="{source}" src="" width="{w}" height="{h}" sandbox="allow-scripts"></iframe>'
+    iframe = '<iframe srcdoc="{source}" src="" width="{w}" height="{h}" frameborder=0 sandbox="allow-scripts"></iframe>'
     invalid_name_pattern = re.compile(r'[^a-zA-Z0-9_\-\. ]+')
 
     def __init__(self):
