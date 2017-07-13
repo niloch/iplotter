@@ -6,11 +6,9 @@ from .base_plotter import IPlotter
 
 
 class C3Plotter(IPlotter):
-    """
-    Class for creating c3.js charts in ipython notebook
-    """
+    """Class for creating c3.js charts in ipython notebook."""
 
-    head = '''
+    head = """
         <!-- Load c3.css -->
         <link href='https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.10/c3.min.css' rel='stylesheet' type='text/css'/>
 
@@ -18,9 +16,9 @@ class C3Plotter(IPlotter):
         <script src='http://d3js.org/d3.v3.min.js' charset='utf-8'></script>
         <script src='http://cdnjs.cloudflare.com/ajax/libs/c3/0.4.10/c3.min.js'></script>
 
-    '''
+    """
 
-    template = '''
+    template = """
         <div id={{div_id}} style='width: 100%; height: 100%'></div>
         <script>
             var {{div_id}} = document.getElementById('{{div_id}}');
@@ -28,15 +26,13 @@ class C3Plotter(IPlotter):
             data['bindto']='#{{div_id}}'
             c3.generate(data);
         </script>
-    '''
+    """
 
     def __init__(self):
         super(C3Plotter, self).__init__()
 
     def render(self, data, div_id="chart", head=""):
-        '''
-        render the data in HTML template
-        '''
+        """Render the data in HTML template."""
         if not self.is_valid_name(div_id):
             raise ValueError(
                 "Name {} is invalid. Only letters, numbers, '_', and '-' are permitted ".format(
@@ -53,16 +49,12 @@ class C3Plotter(IPlotter):
                       h=420,
                       filename='chart',
                       overwrite=True):
-        '''
-        save the rendered html to a file and returns an IFrame to display the plot in the notebook
-        '''
+        """Save the rendered html to a file and returns an IFrame to display the plot in the notebook."""
         self.save(data, filename, overwrite)
         return IFrame(filename + '.html', w, h)
 
     def plot(self, data, w=800, h=420):
-        '''
-        output an iframe containing the plot in the notebook without saving
-        '''
+        """Output an iframe containing the plot in the notebook without saving."""
         return HTML(
             self.iframe.format(
                 source=self.render(
@@ -71,9 +63,7 @@ class C3Plotter(IPlotter):
                 h=h))
 
     def save(self, data, filename='chart', overwrite=True):
-        '''
-        save the rendered html to a file in the same directory as the notebook
-        '''
+        """Save the rendered html to a file in the same directory as the notebook."""
         html = self.render(data=data, div_id=filename, head=self.head)
         if overwrite:
             with open(filename.replace(" ", "_") + '.html', 'w') as f:

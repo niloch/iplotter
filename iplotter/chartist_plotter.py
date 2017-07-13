@@ -6,30 +6,26 @@ from .base_plotter import IPlotter
 
 
 class ChartistPlotter(IPlotter):
-    """
-    Class for creating chartist.js charts in ipython  notebook
-    """
+    """Class for creating chartist.js charts in ipython  notebook."""
 
-    head = '''
+    head = """
         <!-- Load Chartist.js -->
         <link rel='stylesheet' href='https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.css'>
         <script src='https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.js'></script>
-    '''
+    """
 
-    template = '''
+    template = """
         <div id={{div_id}} class='ct-chart' style='width: 100%; height: 100%' ></div>
         <script>
             new Chartist.{{chart_type}}('#{{div_id}}', {{data}}, {{options}});
         </script>
-    '''
+    """
 
     def __init__(self):
         super(ChartistPlotter, self).__init__()
 
     def render(self, data, chart_type, options=None, div_id="chart", head=""):
-        '''
-        render the data in HTML template
-        '''
+        """Render the data in HTML template."""
         if not self.is_valid_name(div_id):
             raise ValueError(
                 "Name {} is invalid. Only letters, numbers, '_', and '-' are permitted ".format(
@@ -51,16 +47,12 @@ class ChartistPlotter(IPlotter):
                       h=420,
                       filename='chart',
                       overwrite=True):
-        '''
-        save the rendered html to a file and return an IFrame to display the plot in the notebook
-        '''
+        """Save the rendered html to a file and return an IFrame to display the plot in the notebook."""
         self.save(data, chart_type, options, filename, overwrite)
         return IFrame(filename + '.html', w, h)
 
     def plot(self, data, chart_type, options=None, w=800, h=420):
-        '''
-        output an iframe containing the plot in the notebook without saving
-        '''
+        """Output an iframe containing the plot in the notebook without saving."""
         return HTML(
             self.iframe.format(
                 source=self.render(
@@ -77,9 +69,7 @@ class ChartistPlotter(IPlotter):
              options=None,
              filename='chart',
              overwrite=True):
-        '''
-        save the rendered html to a file in the same directory as the notebook
-        '''
+        """Save the rendered html to a file in the same directory as the notebook."""
         html = self.render(
             data=data,
             chart_type=chart_type,

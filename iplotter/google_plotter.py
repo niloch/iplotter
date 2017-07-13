@@ -6,15 +6,14 @@ from .base_plotter import IPlotter
 
 
 class GCPlotter(IPlotter):
-    """
-    Class for creating Google Charts in ipython  notebook
-    """
-    head = '''
+    """Class for creating Google Charts in ipython  notebook."""
+
+    head = """
         <!-- Load Google Charts -->
         <script type='text/javascript' src='https://www.gstatic.com/charts/loader.js'></script>
-    '''
+    """
 
-    template = '''
+    template = """
         <div id={{div_id}} style='width: 100%; height: 100%' ></div>
         <script type='text/javascript'>
             google.charts.load('current', {'packages':['{{ chart_package}}']});
@@ -29,7 +28,7 @@ class GCPlotter(IPlotter):
                 chart.draw(data, {{options}});
             }
         </script>
-    '''
+    """
 
     def __init__(self):
         super(GCPlotter, self).__init__()
@@ -41,9 +40,7 @@ class GCPlotter(IPlotter):
                options=None,
                div_id="chart",
                head=""):
-        '''
-        render the data in HTML template
-        '''
+        """Render the data in HTML template."""
         if not self.is_valid_name(div_id):
             raise ValueError(
                 "Name {} is invalid. Only letters, numbers, '_', and '-' are permitted ".format(
@@ -67,9 +64,7 @@ class GCPlotter(IPlotter):
                       h=420,
                       filename='chart',
                       overwrite=True):
-        '''
-        save the rendered html to a file and return an IFrame to display the plot in the notebook
-        '''
+        """Save the rendered html to a file and return an IFrame to display the plot in the notebook."""
         self.save(data, chart_type, chart_package, options, filename,
                   overwrite)
         return IFrame(filename + '.html', w, h)
@@ -81,9 +76,7 @@ class GCPlotter(IPlotter):
              options=None,
              w=800,
              h=420):
-        '''
-        output an iframe containing the plot in the notebook without saving
-        '''
+        """Output an iframe containing the plot in the notebook without saving."""
         return HTML(
             self.iframe.format(
                 source=self.render(
@@ -102,9 +95,7 @@ class GCPlotter(IPlotter):
              options=None,
              filename='chart',
              overwrite=True):
-        '''
-        save the rendered html to a file in the same directory as the notebook
-        '''
+        """Save the rendered html to a file in the same directory as the notebook."""
         html = self.render(
             data=data,
             chart_type=chart_type,
