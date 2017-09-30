@@ -6,16 +6,14 @@ from .base_plotter import IPlotter
 
 
 class ChartJSPlotter(IPlotter):
-    """
-    Class for creating charts.js charts in ipython  notebook
+    """Class for creating charts.js charts in ipython  notebook."""
+
+    head = """
+    <!-- Load Charts.js -->
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.bundle.min.js'></script>
     """
 
-    head = '''
-        <!-- Load Charts.js -->
-       <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.bundle.min.js'></script>
-    '''
-
-    template = '''
+    template = """
         <canvas id='{{div_id}}'></canvas>
         <script>
             var ctx = document.getElementById('{{div_id}}').getContext('2d');
@@ -23,7 +21,7 @@ class ChartJSPlotter(IPlotter):
             ctx.canvas.height = {{h}} - (.15 * {{h}});
             var myNewChart = new Chart(ctx,{ type: '{{chart_type}}', data: {{data}}, options: {{options}} });
         </script>
-    '''
+    """
 
     def __init__(self):
         super(ChartJSPlotter, self).__init__()
@@ -36,9 +34,7 @@ class ChartJSPlotter(IPlotter):
                head="",
                w=800,
                h=420):
-        '''
-        render the data in HTML template
-        '''
+        """Render the data in HTML template."""
         if not self.is_valid_name(div_id):
             raise ValueError(
                 "Name {} is invalid. Only letters, numbers, '_', and '-' are permitted ".format(
@@ -62,16 +58,12 @@ class ChartJSPlotter(IPlotter):
                       h=420,
                       filename='chart',
                       overwrite=True):
-        '''
-        save the rendered html to a file and return an IFrame to display the plot in the notebook
-        '''
+        """Save the rendered html to a file and return an IFrame to display the plot in the notebook."""
         self.save(data, chart_type, options, filename, w, h, overwrite)
         return IFrame(filename + '.html', w, h)
 
     def plot(self, data, chart_type, options=None, w=800, h=420):
-        '''
-        output an iframe containing the plot in the notebook without saving
-        '''
+        """Output an iframe containing the plot in the notebook without saving."""
         return HTML(
             self.iframe.format(
                 source=self.render(
@@ -92,9 +84,7 @@ class ChartJSPlotter(IPlotter):
              w=800,
              h=420,
              overwrite=True):
-        '''
-        save the rendered html to a file in the same directory as the notebook
-        '''
+        """Save the rendered html to a file in the same directory as the notebook."""
         html = self.render(
             data=data,
             chart_type=chart_type,

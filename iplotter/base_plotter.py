@@ -17,9 +17,7 @@ class IPlotter(object):
 
     @classmethod
     def is_valid_name(cls, name):
-        '''
-        check whether plot div id or filenname are valid
-        '''
+        """Check whether plot div id or filenname are valid."""
         if (cls.invalid_name_pattern.search(name)):
             return False
         else:
@@ -27,29 +25,20 @@ class IPlotter(object):
 
     @abstractmethod
     def render(self):
-        '''
-        render the data in HTML template
-        '''
+        """Render the data in HTML template."""
         pass
 
     @abstractmethod
     def plot(self):
-        '''
-        output an iframe containing the plot in the notebook without saving
-        '''
+        """Output an iframe containing the plot in the notebook without saving."""
         pass
 
     @abstractmethod
     def save(self):
-        '''
-        save the rendered html to a file in the same directory as the notebook
-        '''
+        """Save the rendered html to a file in the same directory as the notebook."""
         pass
 
     @abstractmethod
     def plot_and_save(self):
-        '''
-        save the rendered html to a file and return an IFrame to display the
-        plot in the notebook
-        '''
+        """Save the rendered html to a file and return an IFrame to display the plot in the notebook."""
         pass
